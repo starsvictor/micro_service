@@ -1,0 +1,118 @@
+server:
+  port: 3000
+spring:
+  profiles:
+    # dev 开发环境  || pro 正式环境   || native 设置配置文件在本地 
+    active: dev, native
+##  cloud:
+##    # 配置文件
+##    config:
+##      enabled: true
+##      # 对应的配置服务中的应用名称
+##      # name: zlbf-auth  这里将启用 zlbf-config 服务中的 zlbf-auth-dev.yml 文件
+##      name: zlbf-auth
+##      profile: ${spring.profiles.active}  #对应配置服务中的{profile}
+##      # label: master #对应的分支
+##      #指定配置中心
+##      # uri: http://localhost:40001
+##      fail-fast: true
+##      discovery:
+##        enabled: true #启用发现服务功能
+##        # 指定 Config Server 的服务名,将会通过 Consul 发现 ConfigServer
+##        service-id: zlbf-config  #指定服务名称
+##############################################################################
+#
+###################################   开发环境       #################################
+#---
+#spring:
+#  profiles: dev
+#  cloud:
+#    consul:
+#      host: 127.0.0.1
+#      port: 8500
+#      discovery:
+#        enabled: true
+#        register: true
+#        prefer-ip-address: true
+#        service-name: ${spring.application.name}
+#        health-check-interval: 10s
+#        health-check-timeout: 20s
+#        heartbeat:
+#          enabled: true
+#        port: ${server.port}
+#        lifecycle:
+#          enabled: true
+#        scheme: http
+#        prefer-agent-address: false
+#        register-health-check: true
+#        tags: master
+#        query-passing: true
+#        instance-id: ${spring.application.name}-${spring.cloud.consul.host}:${spring.cloud.consul.port}
+#        health-check-path: /health
+#      retry:
+#        initial-interval: 1000
+#        max-attempts: 4
+#        max-interval: 1000
+##    # 配置文件
+##    config:
+##      enabled: true
+##      # 对应的配置服务中的应用名称
+##      # name: zlbf-auth  这里将启用 zlbf-config 服务中的 zlbf-auth-dev.yml 文件
+##      name: zlbf-auth
+##      profile: ${spring.profiles.active}  #对应配置服务中的{profile}
+##      # label: master #对应的分支
+##      #指定配置中心
+##      # uri: http://localhost:40001
+##      fail-fast: true
+##      discovery:
+##        enabled: true #启用发现服务功能
+##        # 指定 Config Server 的服务名,将会通过 Consul 发现 ConfigServer
+##        service-id: zlbf-config  #指定服务名称
+##############################################################################
+#
+###################################   生产环境       #################################
+#---
+#spring:
+#  profiles: pro
+#  cloud:
+#    consul:
+#      host: 192.168.1.115
+#      port: 8500
+#      discovery:
+#        enabled: true
+#        register: true
+#        prefer-ip-address: true
+#        service-name: ${spring.application.name}
+#        health-check-interval: 10s
+#        health-check-timeout: 20s
+#        heartbeat:
+#          enabled: true
+#        port: ${server.port}
+#        lifecycle:
+#          enabled: true
+#        scheme: http
+#        prefer-agent-address: false
+#        register-health-check: true
+#        tags: master
+#        query-passing: true
+#        instance-id: ${spring.application.name}-${spring.cloud.consul.host}:${spring.cloud.consul.port}
+#        health-check-path: /health
+#      retry:
+#        initial-interval: 1000
+#        max-attempts: 4
+#        max-interval: 1000
+#    # 配置文件
+#    config:
+#      enabled: true
+#      # 对应的配置服务中的应用名称
+#      # name: zlbf-auth  这里将启用 zlbf-config 服务中的 zlbf-auth-pro.yml 文件
+#      name: zlbf-auth
+#      profile: ${spring.profiles.active}  #对应配置服务中的{profile}
+#      # label: master #对应的分支
+#      #指定配置中心
+#      uri: http://localhost:4001
+#      fail-fast: true
+#      discovery:
+#        enabled: true #启用发现服务功能
+#        # 指定 Config Server 的服务名,将会通过 Consul 发现 ConfigServer
+#        service-id: zlbf-config  #指定服务名称

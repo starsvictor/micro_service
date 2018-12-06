@@ -1,0 +1,90 @@
+#server:
+# port: 3000
+spring:
+  application:
+    name: zlbf-auth
+  session:
+    store-type: none
+  datasource:
+################## mysql start ############################
+      driver-class-name:  com.mysql.jdbc.Driver
+      #     192.168.3.150   130.75.131.211   134.224.249.39 47.94.252.160
+      url: jdbc:mysql://127.0.0.1:3306/zlbf?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
+      username: root
+      password: root
+################### mysql end ##########################
+
+
+################### redis 单机版 start ########################## 
+  redis: 
+    #remote: false        #cachecloud 获取
+    host: 127.0.0.1
+    port: 6379
+    password: 
+    timeout: 0
+    database: 4
+  #redis:
+    cache:
+      expiration: 3600
+
+  freemarker:
+    allow-request-override: false
+    allow-session-override: false
+    cache: true
+    charset: UTF-8
+    check-template-location: true
+    content-type: text/html
+    enabled: true
+    expose-request-attributes: false
+    expose-session-attributes: false
+    expose-spring-macro-helpers: true
+    prefer-file-system-access: true
+    suffix: .ftl
+    template-loader-path: classpath:/templates/
+    # 在ftl文件中进行使用${re.contextPath}
+    request-context-attribute: re
+
+  # 第三方登录设置
+  social:
+    filter-processes-url: /socialLogin
+    register-url: /social/signUp
+    # provider-id是构造访问qq授权地址，如：localhost/auth/qq，如果是微信，localhost/auth/wechat
+    # provider-id和login-url地址组合成的url应该是你qq互联上面的网站回调域地址，如：/socialLogin/qq
+    qq: 
+      app-id: 101386962
+      app-secret: 2a0f820407df400b84a854d054be8b6a
+      provider-id: qq
+    weixin: 
+      app-id: 101386962
+      app-secret: 2a0f820407df400b84a854d054be8b6a
+      provider-id: wechat
+      
+################### mybatis start ##########################
+mybatis:
+  # Mybatis 配置文件
+  config-location: classpath:mybatis.cfg.xml
+  #配置.xml文件路径
+  #Mybatis扫描(配置xml模式使用)
+  mapper-locations: classpath*:mapper/*.xml 
+  #配置模型路径
+  #起别名. 可省略写mybatis的xml中的resultType的全路径
+  type-aliases-package: com.zl.bf.auth.entity
+################### mybatis end ##########################
+ 
+############### BasicHttp  ##################
+# 只有设置为 false以后 basic才失效
+#security:
+#  basic:
+#    enabled: false
+  
+ 
+ 
+#==================== 日志配合·标准  ============================
+logging:
+  # 日志输出路径
+  path: D:/logs
+  # 日志级别
+  level:
+    root: info
+    # 控制台日志级别
+    console: debug
