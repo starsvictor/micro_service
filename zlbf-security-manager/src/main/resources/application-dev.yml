@@ -30,7 +30,8 @@ spring:
   freemarker:
     allow-request-override: false
     allow-session-override: false
-    cache: true
+    # cache: true
+    cache: false
     charset: UTF-8
     check-template-location: true
     content-type: text/html
@@ -76,9 +77,16 @@ mybatis:
 #security:
 #  basic:
 #    enabled: false
-  
- 
- 
+
+zlbf: 
+  security:
+    brower:
+      loginPage: /login.ftl
+      #loginResponseType: REDIRECT
+
+
+
+
 #==================== 日志配合·标准  ============================
 logging:
   # 日志输出路径
