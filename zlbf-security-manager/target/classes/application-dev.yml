@@ -1,5 +1,8 @@
 #server:
 # port: 3000
+server:
+  session:
+    timeout: 3600
 spring:
   application:
     name: zlbf-auth
@@ -80,11 +83,21 @@ mybatis:
 
 zlbf: 
   security:
-    brower:
-      loginPage: /login.ftl
-      #loginResponseType: REDIRECT
+    browser:
+      login-page: /login.ftl
+      login-response-type: direct
+      sign-in-process-url-form: /authentication/form
+      sign-in-process-url-mobile: /authentication/mobile
+      captcha-url-image: /code/image
+      captcha-url-mobile: /code/mobile
+######### 自定义图片验证码 #########
+    captcha: 
+      image: 
+        url: /code/image
 
-
+######### 自定义短信验证码 #########        
+      mobile: 
+        url: /code/mobile
 
 
 #==================== 日志配合·标准  ============================

@@ -12,6 +12,8 @@
 
 	<properties>
 		<zlbf.security.version>1.0.0-SNAPSHOT</zlbf.security.version>
+		<!-- kaptcha 验证码 -->
+		<kaptcha.version>0.0.9</kaptcha.version>
 	</properties>
 
 	<dependencyManagement>

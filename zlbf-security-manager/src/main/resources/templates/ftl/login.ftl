@@ -29,9 +29,9 @@
                     <input name="password" type="password" placeholder="密码" value="123456">
                 </div>
                 <div class="ececk_warning"><span>密码不能为空</span></div>
-                <div class="form_text_ipt">
+                <div class="form_text_ipt" style="position: relative;">
                     <input style="width: 150px;" name="imageCode" type="text" placeholder="验证码" onkeydown="keyDown()">
-                    <img src="/code/image" id="codeImage" onclick="javascript:this.src='/code/image?random='+Math.random()">
+                    <img style="position: absolute; top: 50%; margin-top: -15px;" src="/code/image" id="codeImage" onclick="javascript:this.src='/code/image?random='+Math.random()">
                 </div>
                 <div class="ececk_warning"><span>验证码不能为空</span></div>
                 <div class="_warning"><span id="span_msg"></span></div>

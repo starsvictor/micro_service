@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.zl.bf.security.browser.handler.CustomerAuthenticationFailureHandler;
 import com.zl.bf.security.browser.handler.CustomerAuthenticationSuccessHandler;
+import com.zl.bf.security.core.captcha.CaptchaSecurityConfig;
 import com.zl.bf.security.core.properties.CustomerSecurityProperties;
 
 
@@ -35,11 +36,16 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private CustomerAuthenticationFailureHandler customerAuthenticationFailureHandler;
 	
+	@Autowired
+	private CaptchaSecurityConfig captchaSecurityConfig;
+	
 	@Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/fonts/**", "/**/*.ftl");
         web.ignoring().antMatchers("/css/**");
         web.ignoring().antMatchers("/images/**");
+        web.ignoring().antMatchers("/code/**");
+        web.ignoring().antMatchers("/authentication/**");
         web.ignoring().antMatchers("/js/**");
     }
 	
@@ -47,6 +53,9 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		
 		http
+			// 验证码校验相关配置
+			.apply(captchaSecurityConfig)
+			.and()
 			// .httpBasic()
 			// 表单登陆相关配置
 			.formLogin()
@@ -58,8 +67,10 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 			.and()
 			.authorizeRequests()
 			.antMatchers("/authentication/require",
+					"/authentication/mobile",
 					"/logout",
 					"/code/image",
+					"/code/mobile",
 					"/fonts/**",
 					customerSecurityProperties.getBrowser().getLoginPage()).permitAll()
 		 	.anyRequest()

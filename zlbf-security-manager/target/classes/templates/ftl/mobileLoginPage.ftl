@@ -26,7 +26,7 @@
                     <div class="ececk_warning"><span>手机号不能为空</span></div>
                     <div class="_warning"><span>${message!''}</span></div>
                     <div class="form_text_ipt">
-                        <input name="smsCode" type="smsCode" placeholder="验证码">
+                        <input name="mobileCode" type="mobileCode" placeholder="验证码">
                     </div>
                     <div class="ececk_warning"><span>验证码</span></div>
                     </div>
@@ -35,7 +35,7 @@
                             <label><input name="" type="checkbox"> 下次自动登录</label>
                         </div>
                         <div class="right check_right">
-                            <a href="#" onclick="sendSms()">发送验证码</a>
+                            <a href="#" onclick="sendMobile()">发送验证码</a>
                         </div>
                     </div>
                     <div class="form_btn">
@@ -65,8 +65,8 @@
     $(function(){
 
     });
-    function sendSms(){
-        $.get("/code/sms?mobile=18512345678");
+    function sendMobile(){
+        $.get("/code/mobile?mobile=18512345678");
     }
 </script>
 </body>
