@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.zl.bf.security.browser.handler.CustomerAuthenticationFailureHandler;
 import com.zl.bf.security.browser.handler.CustomerAuthenticationSuccessHandler;
+import com.zl.bf.security.core.authentication.mobile.MobileCodeAuthenticationSecurityConfig;
 import com.zl.bf.security.core.captcha.CaptchaSecurityConfig;
 import com.zl.bf.security.core.properties.CustomerSecurityProperties;
 
@@ -39,22 +40,30 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private CaptchaSecurityConfig captchaSecurityConfig;
 	
-	@Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/fonts/**", "/**/*.ftl");
-        web.ignoring().antMatchers("/css/**");
-        web.ignoring().antMatchers("/images/**");
-        web.ignoring().antMatchers("/code/**");
-        web.ignoring().antMatchers("/authentication/**");
-        web.ignoring().antMatchers("/js/**");
-    }
+	@Autowired
+	private MobileCodeAuthenticationSecurityConfig mobileCodeAuthenticationSecurityConfig;
+	
+//	@Override
+//    public void configure(WebSecurity web) throws Exception {
+//        web.ignoring().antMatchers("/fonts/**", "/**/*.ftl");
+//        web.ignoring().antMatchers("/css/**");
+//        web.ignoring().antMatchers("/images/**");
+//        web.ignoring().antMatchers("/code/**");
+//        web.ignoring().antMatchers("/authentication/**");
+//        web.ignoring().antMatchers("/js/**");
+//    }
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
+		
+		
 		http
 			// 验证码校验相关配置
 			.apply(captchaSecurityConfig)
+			.and()
+			// 验证码登陆相关配置
+			.apply(mobileCodeAuthenticationSecurityConfig)
 			.and()
 			// .httpBasic()
 			// 表单登陆相关配置
@@ -69,10 +78,15 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/authentication/require",
 					"/authentication/mobile",
 					"/logout",
-					"/code/image",
-					"/code/mobile",
+					"/code/**",
 					"/fonts/**",
-					customerSecurityProperties.getBrowser().getLoginPage()).permitAll()
+					"/**/*.ftl",
+					"/js/**",
+					"/css/**",
+					"/css/**",
+					"/authentication/mobilePage",
+					customerSecurityProperties.getBrowser().getLoginPage())
+					.permitAll()
 		 	.anyRequest()
 		 	.authenticated()
 			.and()
