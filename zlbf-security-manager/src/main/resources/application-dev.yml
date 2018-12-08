@@ -98,7 +98,20 @@ zlbf:
 ######### 自定义短信验证码 #########        
       mobile: 
         url: /me/*
-
+######### 第三方登录 #############
+    # 这里的 filter-process-url/provider-id 就是页面实现QQ第三方登录时的 url地址
+    social:
+      filter-process-url: /auth
+      qq: 
+        app-id: 101386962
+        app-secret: 2a0f820407df400b84a854d054be8b6a
+        provider-id: qq
+      weixin:
+        app-id: 
+        app-secret: 
+        provider-id: weixin
+        
+        
 
 #==================== 日志配合·标准  ============================
 logging:

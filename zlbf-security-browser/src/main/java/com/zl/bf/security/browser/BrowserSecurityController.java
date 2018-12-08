@@ -22,6 +22,7 @@ import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.social.connect.Connection;
+import org.springframework.social.connect.web.ProviderSignInUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +34,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.code.kaptcha.Producer;
 import com.zl.bf.security.browser.support.SimpleResponse;
+import com.zl.bf.security.browser.support.SocialUserInfo;
 import com.zl.bf.security.core.properties.CustomerSecurityProperties;
 import com.zl.bf.security.core.properties.constant.CustomerSecurityConstants;
 
@@ -58,6 +60,9 @@ public class BrowserSecurityController {
 	
 	@Autowired
 	private Producer producer;
+	
+	@Autowired
+	private ProviderSignInUtils providerSignInUtils;
 	
 	/**
 	 * 当没身份校验时的登陆调试跳转逻辑
@@ -206,4 +211,23 @@ public class BrowserSecurityController {
         return new ModelAndView(page, map);
     }
 	
+    /**
+	 * 查看已绑定用户
+	 * @param request
+	 * @return
+	 */
+	@GetMapping("/social/user")
+	public SocialUserInfo getSocialInfo(HttpServletRequest request) {
+		SocialUserInfo userInfo = new SocialUserInfo();
+		Connection<?> connection = providerSignInUtils.getConnectionFromSession(new ServletWebRequest(request));
+		
+		if (connection != null)  {
+			userInfo.setProviderId(connection.getKey().getProviderId());
+			userInfo.setProviderUserId(connection.getKey().getProviderUserId());
+			userInfo.setNickName(connection.getDisplayName());
+			userInfo.setHeaderImg(connection.getImageUrl());
+		}
+		
+		return userInfo;
+	}
 }

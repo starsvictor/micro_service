@@ -55,9 +55,9 @@
                         <span>其它登录方式</span>&nbsp;&nbsp;<a href="/authentication/mobilePage">短信登录</a>
                     </div>
                     <div class="right other_right">
-                        <a href="${re.contextPath}/login/qq"><i class="fa fa-qq fa-2x"></i></a>
-                        <a href="${re.contextPath}/login/weixin"><i class="fa fa-weixin fa-2x"></i></a>
-                        <a href="${re.contextPath}/login/weibo"><i class="fa fa-weibo fa-2x"></i></a>
+                        <a href="${re.contextPath}/auth/qq"><i class="fa fa-qq fa-2x"></i></a>
+                        <a href="${re.contextPath}/auth/weixin"><i class="fa fa-weixin fa-2x"></i></a>
+                        <a href="${re.contextPath}/auth/weibo"><i class="fa fa-weibo fa-2x"></i></a>
                     </div>
                 </div>
             </div>
